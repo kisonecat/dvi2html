@@ -23,7 +23,7 @@ export var specials = {
 };
 
 export function dvi2html( dviStream, htmlStream ) {
-  let parser = ximera(title(papersize(html(svg(color(mergeText(dviParser(dviStream))))))));
+  let parser = title(papersize(html(svg(color(mergeText(dviParser(dviStream)))))));
 
   let machine = new HTMLMachine( htmlStream );
 
@@ -36,7 +36,7 @@ export function dvi2vdom( dviStream: any,
                           h: any,
                           ximeraRuleHandler : any,
                           ximeraPushHandler : any,
-                          ximeraPopHandler : any,                          
+                          ximeraPopHandler : any,
                           callback: any ) {
   let parser = ximera(title(papersize(html(svg(color(mergeText(dviParser(dviStream))))))));
 

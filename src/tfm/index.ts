@@ -638,8 +638,8 @@ function parse(buffer) {
 }
 
 export function tfmData( fontname ) {
-  if (fontdata[fontname]) {
-    let buffer = Buffer.from(fontdata[fontname], 'base64');
+  if (fontdata['default'][fontname]) {
+    let buffer = Buffer.from(fontdata['default'][fontname], 'base64');
     return buffer;
   }
     

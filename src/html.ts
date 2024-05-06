@@ -84,21 +84,20 @@ export default class HTMLMachine extends Machine {
 
     if (this.svgDepth == 0) {
       // FIXME: Should I have 0.99624in instead of 1in ?
-      this.writeToPage( `<svg width="1in" height="1in" viewBox="0 0 72 72" style="position: absolute; top: ${top}pt; left: ${left}pt; overflow: visible;">\n` );
-    } else {
-      this.writeToPage( `<g transform="translate(${left},${top})">\n` );
+      this.writeToPage( `<svg width="1in" height="1in" viewBox="0 0 72 72" style="position: absolute; top: 0pt; left: 0pt; overflow: visible;">\n` );
     }
     
+    this.writeToPage( `<g transform="translate(${left},${top})">\n` );
     this.svgDepth += 1;
   }
 
   endSVG( ) {
     this.svgDepth -= 1;
 
+    this.writeToPage( '</g>' );
+    
     if (this.svgDepth == 0) {
       this.writeToPage( '</svg>' );
-    } else {
-      this.writeToPage( '</g>' );
     }
   }
   
@@ -164,11 +163,13 @@ export default class HTMLMachine extends Machine {
       textHeight = Math.max(textHeight, metrics.height);
       textDepth = Math.max(textDepth, metrics.depth);
 
-      let encoding = fontlist[this.font.name];
+      let encoding = fontlist['default'][this.font.name];
+      /*
       if (this.font.name == 'cmmi10') {
         console.log(this.font.name, encoding, JSON.stringify(glyphs[encoding]));
       }
-      let codepoint = glyphs[encoding][c];
+      */
+      let codepoint = glyphs['default'][encoding][c];
       htmlText += `&#${codepoint};`;
     }
     
